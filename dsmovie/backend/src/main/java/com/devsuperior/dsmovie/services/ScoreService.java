@@ -50,12 +50,13 @@ public class ScoreService {
 			sum = sum + s.getValue();
 		}
 		
-		double avg = sum / movie.getScores().size();
+		int    qtd = movie.getScores().size();
+		double avg = sum / qtd ;
 		
 		movie.setScore(avg);
-		movie.setCount(movie.getScores().size());
+		movie.setCount(qtd);
 	
-		movie = movieRepository.save(movie);
+		movie = movieRepository.saveAndFlush(movie);
 
 		return new MovieDTO(movie);
 		//return null;
